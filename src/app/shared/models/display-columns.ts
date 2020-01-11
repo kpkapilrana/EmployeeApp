@@ -1,8 +1,9 @@
 export interface IDisplayColumns {
-    name: string;
+    name?: string;
     id: string;
-    weight: number;
+    weight?: number;
     type: string;
+    // tslint:disable-next-line: ban-types
     sort ?: Boolean;
 }
 
@@ -23,6 +24,17 @@ export class DisplayNumber implements IDisplayColumns {
         public name: string,
         public id: string,
         public weight: number,
+        public sort?: boolean
+    ) {
+    }
+}
+
+export class ActionColumn implements IDisplayColumns{
+    type = 'number';
+    constructor(
+        public id: string,
+        public name?: string,
+        public weight?: number,
         public sort?: boolean
     ) {
     }

@@ -6,6 +6,7 @@ import { debounceTime } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   searchTerm$ = new Subject<string>();
   constructor(
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -36,6 +38,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     this.columnDefination.forEach(el => {
       this.displayColumns.push(el.id);
     });
+    // this.displayColumns.push('action');
 
     this.subscription = this.employeeService.get().subscribe(result => {
       if (result) {
@@ -69,6 +72,20 @@ export class EmployeeComponent implements OnInit, OnDestroy {
       this.dataSource.filterPredicate =
         (data: any, filter: string) => data;
     }
+  }
+
+  edit(row) {
+    console.log(row);
+    this.router.navigate(['/edit', row.id], {
+          state: {
+            data: row
+          }
+        });
+  }
+
+  add() {
+    // tslint:disable-next-line: no-unused-expression
+    this.router.navigate(['/add']);
   }
 
 }

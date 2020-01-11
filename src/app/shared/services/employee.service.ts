@@ -12,9 +12,10 @@ import { IEmployee } from '../models/employee';
 export class EmployeeService {
   private baseUrl = environment.apiUrl + '/api';
   private searchUrl = this.baseUrl + '/emps';
-  private addUrl = this.baseUrl + '/add';
+  private byIdUrl = this.baseUrl + '/getEmployeeById';
+  private addUrl = this.baseUrl + '/emp';
   private deleteUrl = this.baseUrl + '/delete';
-  private updateUrl = this.baseUrl + '/update';
+  private updateUrl = this.baseUrl + '/emp';
 
   constructor(private http: HttpClient) { }
 
@@ -42,9 +43,21 @@ export class EmployeeService {
       );
   }
 
+  getById(payload): Observable<any> {
+    // --20190704 console.log("the payload: ", payload);
+    return this.http
+      .post<any>(this.byIdUrl, payload)
+      .pipe(
+        tap(response => {
+          return response;
+        }),
+
+      );
+  }
+
   edit(payload): Observable<any> {
     return this.http
-      .put<any>(this.updateUrl, payload)
+      .put<any>(`${this.updateUrl}/${payload.id}`, payload.data)
       .pipe(
         tap(response => {
           return response;

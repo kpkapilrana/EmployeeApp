@@ -21,7 +21,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatCardModule } from "@angular/material/card";
 import { MatChipsModule } from "@angular/material/chips";
-import { MatNativeDateModule, MatRippleModule } from "@angular/material/core";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -52,7 +52,10 @@ const AngularMatModules = [
   MatPaginatorModule,
   MatSortModule,
   MatGridListModule,
-  MatToolbarModule
+  MatToolbarModule,
+  FormsModule,
+  ReactiveFormsModule,
+  MatSnackBarModule
 ];
 
 @NgModule({
@@ -61,13 +64,17 @@ const AngularMatModules = [
     CommonModule,
     ...AngularMatModules,
     HttpClientModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     ...AngularMatModules,
     HttpClientModule,
     PhoneNumberPipe,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }
